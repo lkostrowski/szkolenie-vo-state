@@ -19,8 +19,8 @@ class ProductCount {
             throw new Error('ProductCount expects at least 1');
         }
 
-        if(!Number.isInteger(value)) {
-            throw new Error('ProductCount must be an integer')
+        if (!Number.isInteger(value)) {
+            throw new Error('ProductCount must be an integer');
         }
 
         this.value = value;
@@ -38,16 +38,19 @@ describe('ProductCount', function () {
     });
 
     test('Product count works for integer value: 2', () => {
-        expect(new ProductCount(2).value).toBe(2)
+        expect(new ProductCount(2).value).toBe(2);
     });
 });
-
 
 abstract class Price {
     value: number;
     abstract currency: string;
 
     constructor(value: number) {
+        if (value <= 0) {
+            throw new Error('Price cant be less than 0');
+        }
+
         this.value = value;
     }
 }
@@ -59,6 +62,10 @@ class UsdPrice extends Price {
         super(value);
     }
 }
+
+test('Price cant be less than 0', () => {
+    expect(() => new UsdPrice(-100)).toThrow();
+});
 
 export function calculateCartItem(price: Price, count: ProductCount, tax: Tax) {
     const basePrice = price.value * count.value;
@@ -73,10 +80,12 @@ const someProduct = {
     tax: new Tax(23),
 };
 
+const productsCount = new ProductCount(2);
+
 const threeProductsGrossValue = calculateCartItem(
     someProduct.price,
-    new ProductCount(3),
-    someProduct.tax,
+    productsCount, //the same as tax
+    someProduct.tax, // the same object as count
 );
 
 // Oops
