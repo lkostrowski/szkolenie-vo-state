@@ -6,6 +6,7 @@ type Product = {
 };
 
 // Classic example - where is error?
+// We can go from error state to loading, by mistake be dont clear error
 const useFetchProductList = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
@@ -36,7 +37,7 @@ const ProductsList = () => {
     if (loading && error) {
         // This should never happen, but Typescript is ok with it!
 
-        return <span>Should not happen</span>;
+        return <span>Should never happen</span>;
     }
 
     return (
