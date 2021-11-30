@@ -1,4 +1,4 @@
-class Tax {
+export class Tax {
     value: number;
 
     constructor(value: number) {
@@ -10,6 +10,7 @@ class Tax {
     }
 }
 
+// maybe premature, be now we can protect from 0 and float
 class ProductCount {
     value: number;
 
@@ -18,9 +19,29 @@ class ProductCount {
             throw new Error('ProductCount expects at least 1');
         }
 
+        if(!Number.isInteger(value)) {
+            throw new Error('ProductCount must be an integer')
+        }
+
         this.value = value;
     }
 }
+
+// we can test it
+describe('ProductCount', function () {
+    test('Product count cant have value 0', () => {
+        expect(() => new ProductCount(0)).toThrow();
+    });
+
+    test('Product count cant have floating value', () => {
+        expect(() => new ProductCount(1.5)).toThrow();
+    });
+
+    test('Product count works for integer value: 2', () => {
+        expect(new ProductCount(2).value).toBe(2)
+    });
+});
+
 
 abstract class Price {
     value: number;
