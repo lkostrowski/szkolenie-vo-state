@@ -23,17 +23,14 @@
         "react-dom": "^17.0.2",
         "ts-jest": "^27.0.6",
         "typescript": "^4.4.4",
-        "xstate": "^4.26.1",
-        "@xstate/fsm": "^1.6.2",
-        "@xstate/react": "^1.6.3",
-        "@xstate/inspect": "^0.5.2",
-        "@xstate/test": "^0.5.0"
+        "robot3": "^0.2.21"
     },
     "prettier": {
         "tabWidth": 4,
         "trailingComma": "all",
         "arrowParens": "always",
         "bracketSpacing": true,
-        "singleQuote": true
+        "singleQuote": true,
+        "useTabs": true
     }
 }

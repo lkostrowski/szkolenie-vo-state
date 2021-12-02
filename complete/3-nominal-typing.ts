@@ -1,38 +1,38 @@
 export class Tax {
-    value: number;
+	value: number;
 
-    constructor(value: number) {
-        if (value > 1 || value < 0) {
-            throw new Error('Tax expects value between 0.0 and 1.0');
-        }
+	constructor(value: number) {
+		if (value > 1 || value < 0) {
+			throw new Error('Tax expects value between 0.0 and 1.0');
+		}
 
-        this.value = value;
-    }
+		this.value = value;
+	}
 }
 
 // Its ok for TS - duck typing!
 const incorrectTax: Tax = {
-    value: 0,
+	value: 0,
 };
 
 export class TheTax {
-    private __type = 'TheTax'; // ✅
+	private __type = 'TheTax'; // ✅
 
-    value: number;
+	value: number;
 
-    constructor(value: number) {
-        if (value > 1 || value < 0) {
-            throw new Error('Tax expects value between 0.0 and 1.0');
-        }
+	constructor(value: number) {
+		if (value > 1 || value < 0) {
+			throw new Error('Tax expects value between 0.0 and 1.0');
+		}
 
-        this.value = value;
-    }
+		this.value = value;
+	}
 }
 
 // Doent work, good
 const correctTax: TheTax = {
-    value: 0,
-    __type: 'TheTax',
+	value: 0,
+	__type: 'TheTax',
 };
 
 // ✅
